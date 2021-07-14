@@ -1,0 +1,136 @@
+
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Invoice</title>
+		<style>
+		body{
+		width:80%;
+
+		}
+		h1{
+		background-color:black;
+		color:white;
+		text-align:center;
+		padding-top:8px;
+		padding-bottom:0px;
+
+		}
+		address{
+		margin-left:30px;
+
+		}
+		address p{
+		font-size:15px;
+
+		}
+		table.meta{
+		margin-left:30px;
+
+		}
+		table.meta th{
+		width:120px;
+		text-align:left;
+		font-size:12px;
+		}
+		table.meta td{
+		width:150px;
+		font-size:12px;
+
+		}
+		table.balance{
+		margin-left:30px;
+		font-size:12px;
+		}
+		table.balance th{
+		width:100px;
+		text-align:left;
+		}
+		table.balance td{
+		width:100px;
+
+		}
+		table.inventory th{
+		text-align:left;
+
+		}
+
+		</style>
+	</head>
+	<body>
+		<header>
+			<h1>Invoice</h1>
+			<address contenteditable>
+				<p>{{order.customer_name}}<br>
+				{{order.delivery_address}}<br>
+				{{order.customer_phone}}</p>
+			</address>
+		</header>
+		<article>
+<!--			<h1>Recipient</h1>-->
+
+			<table class="meta">
+				<tr>
+					<th>Invoice #</th>
+					<td>---------</td>
+				</tr>
+				<tr>
+					<th>Date: </th>
+					<td>{{order.order_date}}</td>
+				</tr>
+				<tr>
+					<th><span contenteditable>Amount Due</span></th>
+					<td><span id="prefix" contenteditable>$</span><span>600.00</span></td>
+				</tr>
+			</table>
+			<hr>
+			<table class="inventory">
+				<thead>
+					<tr>
+						<th>Item</th>
+						<th>LD</th>
+						<th>DC</th>
+						<th>PR</th>
+						<th>Service type</th>
+						<th>Quantity</th>
+						<th>Price</th>
+					</tr>
+				</thead>
+				<tbody>
+				{% for item in items %}
+					<tr>
+						<td>{{item.item.title}}</td>
+						<td>{{item.ld}}</td>
+						<td>{{item.dc}}</td>
+						<td>{{item.pr}}</td>
+						<td>{{item.service_type}}</td>
+						<td>4</td>
+						<td>600.00</td>
+					</tr>
+				{% endfor %}
+				</tbody>
+			</table>
+			<hr>
+			<table class="balance">
+				<tr>
+					<th><span contenteditable>SubTotal</span></th>
+					<td>{{order.subtotal}} Tk</td>
+				</tr>
+				<tr>
+					<th><span contenteditable>Discount</span></th>
+					<td>{{order.discount}} Tk</td>
+				</tr>
+				<tr>
+					<th><span contenteditable>Total</span></th>
+					<td>{{order.total}} Tk</td>
+				</tr>
+			</table>
+		</article>
+		<aside>
+			<h1><span contenteditable>Additional Notes</span></h1>
+			<div contenteditable>
+				<p>Something here...</p>
+			</div>
+		</aside>
+	</body>
+</html>
