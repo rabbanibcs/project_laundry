@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.models import Group
 
-from laundry.models import Orders, Categories, Items
+from laundry.models import Orders, Categories, Items, OrderItems
 
 
 @admin.action(description='Mark selected orders as processing')
@@ -57,5 +57,5 @@ class ItemAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Items, ItemAdmin)
-
+admin.site.register(OrderItems)
 admin.site.unregister(Group)

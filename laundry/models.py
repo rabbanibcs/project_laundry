@@ -116,6 +116,7 @@ class OrderItems(models.Model):
     ld = models.DecimalField(max_digits=10, decimal_places=2)
     dc = models.DecimalField(max_digits=10, decimal_places=2)
     pr = models.DecimalField(max_digits=10, decimal_places=2)
+    quantity = models.IntegerField()
     service_type = models.CharField(max_length=2)
 
     class Meta:

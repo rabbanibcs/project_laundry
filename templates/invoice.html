@@ -1,4 +1,4 @@
-
+{% load filter %}
 <html>
 	<head>
 		<meta charset="utf-8">
@@ -17,7 +17,7 @@
 
 		}
 		address{
-		margin-left:30px;
+		margin-left:20px;
 
 		}
 		address p{
@@ -25,7 +25,7 @@
 
 		}
 		table.meta{
-		margin-left:30px;
+		margin-left:20px;
 
 		}
 		table.meta th{
@@ -39,7 +39,7 @@
 
 		}
 		table.balance{
-		margin-left:30px;
+		margin-left:20px;
 		font-size:12px;
 		}
 		table.balance th{
@@ -52,6 +52,10 @@
 		}
 		table.inventory th{
 		text-align:left;
+
+		}
+		table.inventory tr{
+		padding-top:5px;
 
 		}
 
@@ -67,20 +71,20 @@
 			</address>
 		</header>
 		<article>
-<!--			<h1>Recipient</h1>-->
+
 
 			<table class="meta">
 				<tr>
 					<th>Invoice #</th>
-					<td>---------</td>
+					<td>{{order.order_title}}</td>
 				</tr>
 				<tr>
-					<th>Date: </th>
+					<th>Date : </th>
 					<td>{{order.order_date}}</td>
 				</tr>
 				<tr>
-					<th><span contenteditable>Amount Due</span></th>
-					<td><span id="prefix" contenteditable>$</span><span>600.00</span></td>
+					<th>Amount Due :</th>
+					<td><b>{{order.total}} Tk</b></td>
 				</tr>
 			</table>
 			<hr>
@@ -104,8 +108,14 @@
 						<td>{{item.dc}}</td>
 						<td>{{item.pr}}</td>
 						<td>{{item.service_type}}</td>
-						<td>4</td>
-						<td>600.00</td>
+						<td>{{item.quantity}}</td>
+					{% if item.service_type == 'ld' %}
+						<td>{{item.ld|price:item.quantity}}</td>
+					{% elif item.service_type == 'dc' %}
+						<td>{{item.dc|price:item.quantity}}</td>
+					{% else %}
+						<td>{{item.pr|price:item.quantity}}</td>
+					{% endif %}
 					</tr>
 				{% endfor %}
 				</tbody>
